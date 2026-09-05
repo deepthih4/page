@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 >
 
-<title>Login & Sign Up</title>
+<title>Login & Signup</title>
 
 <style>
 
@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -24,31 +25,42 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff,
+            #eff6ff
+        );
 }
 
 .container {
     width: 100%;
     max-width: 400px;
-    background: #ffffff;
-    padding: 35px 30px;
-    border-radius: 18px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    background: rgba(255,255,255,0.96);
+    padding: 36px 28px;
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 60px rgba(79,70,229,0.14);
+
+    border:
+        1px solid rgba(99,102,241,0.10);
 }
 
 .title {
+    font-size: 30px;
+    font-weight: 800;
     text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: #111827;
+    color: #312e81;
     margin-bottom: 8px;
 }
 
 .subtitle {
     text-align: center;
+    color: #64748b;
     font-size: 14px;
-    color: #6b7280;
     margin-bottom: 28px;
 }
 
@@ -60,43 +72,65 @@ body {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #374151;
+    color: #334155;
     margin-bottom: 7px;
 }
 
 .input-group input {
     width: 100%;
-    height: 50px;
+    height: 51px;
     padding: 0 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    outline: none;
     font-size: 16px;
-    transition: 0.2s;
-    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+    outline: none;
+    color: #0f172a;
+    transition: 0.25s;
+}
+
+.input-group input::placeholder {
+    color: #94a3b8;
 }
 
 .input-group input:focus {
-    border-color: #16a34a;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.10);
+    background: #ffffff;
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 4px rgba(99,102,241,0.12);
 }
 
 button {
     width: 100%;
-    height: 50px;
+    height: 51px;
     border: none;
-    border-radius: 10px;
-    background: #16a34a;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
     color: #ffffff;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    margin-top: 5px;
-    transition: 0.2s;
+    margin-top: 6px;
+
+    box-shadow:
+        0 8px 20px rgba(79,70,229,0.23);
+
+    transition: 0.25s;
 }
 
 button:hover {
-    background: #15803d;
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 12px 26px rgba(79,70,229,0.28);
 }
 
 button:active {
@@ -106,42 +140,56 @@ button:active {
 button:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+    transform: none;
 }
 
 .switch-text {
-    margin-top: 22px;
     text-align: center;
+    margin-top: 23px;
     font-size: 14px;
-    color: #6b7280;
+    color: #64748b;
 }
 
 .switch-text span {
-    color: #16a34a;
-    font-weight: 600;
+    color: #5b21b6;
+    font-weight: 700;
     cursor: pointer;
+}
+
+.switch-text span:hover {
+    text-decoration: underline;
 }
 
 .message {
     display: none;
     padding: 11px 13px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 13px;
     margin-bottom: 17px;
-}
-
-.message.error {
-    display: block;
-    color: #b91c1c;
-    background: #fee2e2;
 }
 
 .message.success {
     display: block;
     color: #166534;
     background: #dcfce7;
+    border: 1px solid #bbf7d0;
 }
 
-#signupForm {
+.message.error {
+    display: block;
+    color: #b91c1c;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+}
+
+.message.loading {
+    display: block;
+    color: #3730a3;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+}
+
+#signupPage {
     display: none;
 }
 
@@ -153,31 +201,30 @@ button:disabled {
 
     .container {
         padding: 30px 22px;
-        border-radius: 15px;
+        border-radius: 18px;
     }
 
     .title {
-        font-size: 26px;
+        font-size: 27px;
     }
-
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
+    <!-- ============================= -->
+    <!-- LOGIN PAGE -->
+    <!-- ============================= -->
 
-    <!-- ========================= -->
-    <!-- LOGIN FORM -->
-    <!-- ========================= -->
+    <div id="loginPage">
 
-    <div id="loginForm">
-
-        <h1 class="title">Login</h1>
+        <h1 class="title">
+            Welcome Back
+        </h1>
 
         <p class="subtitle">
             Login to continue
@@ -188,28 +235,29 @@ button:disabled {
             class="message">
         </div>
 
-
         <form onsubmit="login(event)">
-
 
             <div class="input-group">
 
-                <label>Name</label>
+                <label>
+                    Username
+                </label>
 
                 <input
                     type="text"
-                    id="loginName"
-                    placeholder="Enter your name"
+                    id="loginUsername"
+                    placeholder="Enter your username"
                     autocomplete="username"
                     required
                 >
 
             </div>
 
-
             <div class="input-group">
 
-                <label>Password</label>
+                <label>
+                    Password
+                </label>
 
                 <input
                     type="password"
@@ -221,7 +269,6 @@ button:disabled {
 
             </div>
 
-
             <button
                 type="submit"
                 id="loginButton"
@@ -229,9 +276,7 @@ button:disabled {
                 Login
             </button>
 
-
         </form>
-
 
         <div class="switch-text">
 
@@ -243,79 +288,69 @@ button:disabled {
 
         </div>
 
-
     </div>
 
 
+    <!-- ============================= -->
+    <!-- SIGNUP PAGE -->
+    <!-- ============================= -->
 
-    <!-- ========================= -->
-    <!-- SIGNUP FORM -->
-    <!-- ========================= -->
-
-    <div id="signupForm">
-
+    <div id="signupPage">
 
         <h1 class="title">
-            Sign Up
+            Create Account
         </h1>
 
-
         <p class="subtitle">
-            Create your account
+            Sign up to get started
         </p>
-
 
         <div
             id="signupMessage"
             class="message">
         </div>
 
-
         <form onsubmit="signup(event)">
-
-
-            <!-- NAME -->
 
             <div class="input-group">
 
-                <label>Name</label>
+                <label>
+                    Username
+                </label>
 
                 <input
                     type="text"
-                    id="signupName"
-                    placeholder="Enter your name"
-                    autocomplete="name"
+                    id="signupUsername"
+                    placeholder="Create your username"
+                    autocomplete="username"
                     required
                 >
 
             </div>
 
-
-
-            <!-- MOBILE -->
-
             <div class="input-group">
 
-                <label>Mobile Number</label>
+                <label>
+                    Phone Number
+                </label>
 
                 <input
                     type="tel"
-                    id="signupMobile"
-                    placeholder="Enter 10 digit mobile number"
+                    id="signupPhone"
+                    placeholder="Enter 10 digit phone number"
                     inputmode="numeric"
                     maxlength="10"
+                    autocomplete="tel"
                     required
                 >
 
             </div>
 
-
-
-            <!-- PASSWORD -->
-
             <div class="input-group">
 
-                <label>Password</label>
+                <label>
+                    Password
+                </label>
 
                 <input
                     type="password"
@@ -327,26 +362,6 @@ button:disabled {
 
             </div>
 
-
-
-            <!-- CONFIRM PASSWORD -->
-
-            <div class="input-group">
-
-                <label>Confirm Password</label>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Confirm password"
-                    autocomplete="new-password"
-                    required
-                >
-
-            </div>
-
-
-
             <button
                 type="submit"
                 id="signupButton"
@@ -354,9 +369,7 @@ button:disabled {
                 Create Account
             </button>
 
-
         </form>
-
 
         <div class="switch-text">
 
@@ -368,38 +381,39 @@ button:disabled {
 
         </div>
 
-
     </div>
-
 
 </div>
 
 
-
-<!-- ======================================== -->
-<!-- SUPABASE JAVASCRIPT -->
-<!-- ======================================== -->
+<!-- ======================================= -->
+<!-- SUPABASE JAVASCRIPT LIBRARY -->
+<!-- ======================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
+// =========================================================
+// SUPABASE CONNECTION
+// =========================================================
+//
+// REPLACE THESE TWO VALUES
+//
+// Example URL:
+// https://abcdefgh.supabase.co
+//
+// Use ONLY publishable / anon key.
+// NEVER put service_role key here.
+//
+// =========================================================
 
-// ============================================
-// SUPABASE DETAILS
-// ============================================
-
-
-// REPLACE THIS
 const SUPABASE_URL =
     "https://pvagpesejvoldwldmzhs.supabase.co/";
 
-
-// REPLACE THIS
 const SUPABASE_ANON_KEY =
     "sb_publishable_xCUj4SV7Wvapf8NkEMZHrg_zdDOwvDU";
-
 
 
 const supabaseClient =
@@ -409,70 +423,61 @@ const supabaseClient =
     );
 
 
-
-// ============================================
+// =========================================================
 // SHOW SIGNUP
-// ============================================
+// =========================================================
 
 function showSignup() {
 
     document
-        .getElementById("loginForm")
+        .getElementById("loginPage")
         .style.display = "none";
 
-
     document
-        .getElementById("signupForm")
+        .getElementById("signupPage")
         .style.display = "block";
 
-
     clearMessages();
-
 }
 
 
-
-// ============================================
+// =========================================================
 // SHOW LOGIN
-// ============================================
+// =========================================================
 
 function showLogin() {
 
     document
-        .getElementById("signupForm")
+        .getElementById("signupPage")
         .style.display = "none";
 
-
     document
-        .getElementById("loginForm")
+        .getElementById("loginPage")
         .style.display = "block";
 
-
     clearMessages();
-
 }
 
 
-
-// ============================================
+// =========================================================
 // SIGNUP
-// ============================================
+// =========================================================
 
 async function signup(event) {
 
     event.preventDefault();
 
 
-    const name =
+    const username =
         document
-            .getElementById("signupName")
+            .getElementById("signupUsername")
             .value
             .trim();
 
 
-    const mobile =
+    const phone =
         document
-            .getElementById("signupMobile")
+            .getElementById("signupPhone")
             .value
             .trim();
 
@@ -480,12 +485,6 @@ async function signup(event) {
     const password =
         document
             .getElementById("signupPassword")
-            .value;
-
-
-    const confirmPassword =
-        document
-            .getElementById("confirmPassword")
             .value;
 
 
@@ -499,16 +498,15 @@ async function signup(event) {
             .getElementById("signupButton");
 
 
+    // =====================================================
+    // USERNAME VALIDATION
+    // =====================================================
 
-    // ========================================
-    // NAME VALIDATION
-    // ========================================
-
-    if (name.length < 2) {
+    if (username.length < 3) {
 
         showMessage(
             message,
-            "Please enter a valid name.",
+            "Username must contain at least 3 characters.",
             "error"
         );
 
@@ -516,16 +514,15 @@ async function signup(event) {
     }
 
 
+    // =====================================================
+    // PHONE VALIDATION
+    // =====================================================
 
-    // ========================================
-    // MOBILE VALIDATION
-    // ========================================
-
-    if (!/^[0-9]{10}$/.test(mobile)) {
+    if (!/^[0-9]{10}$/.test(phone)) {
 
         showMessage(
             message,
-            "Please enter a valid 10 digit mobile number.",
+            "Please enter a valid 10 digit phone number.",
             "error"
         );
 
@@ -533,10 +530,9 @@ async function signup(event) {
     }
 
 
-
-    // ========================================
+    // =====================================================
     // PASSWORD VALIDATION
-    // ========================================
+    // =====================================================
 
     if (password.length < 6) {
 
@@ -550,87 +546,66 @@ async function signup(event) {
     }
 
 
-
-    // ========================================
-    // CONFIRM PASSWORD
-    // ========================================
-
-    if (password !== confirmPassword) {
-
-        showMessage(
-            message,
-            "Passwords do not match.",
-            "error"
-        );
-
-        return;
-    }
-
-
-
-    // ========================================
-    // BUTTON LOADING
-    // ========================================
+    // =====================================================
+    // START LOADING
+    // =====================================================
 
     button.disabled = true;
-
-    button.textContent =
-        "Creating Account...";
-
-
+    button.textContent = "Creating Account...";
 
     showMessage(
         message,
-        "Creating your account...",
-        "success"
+        "Please wait...",
+        "loading"
     );
-
 
 
     try {
 
-
-        // ====================================
-        // CALL SUPABASE SIGNUP FUNCTION
-        // ====================================
+        // =================================================
+        // CALL SUPABASE SIGNUP RPC
+        // =================================================
 
         const { data, error } =
             await supabaseClient.rpc(
+
                 "signup_user",
+
                 {
 
-                    p_name: name,
+                    p_username: username,
 
-                    p_mobile: mobile,
+                    p_phone: phone,
 
                     p_password: password
 
                 }
+
             );
 
 
-
         console.log(
-            "Signup Data:",
+            "Signup data:",
             data
         );
 
 
         console.log(
-            "Signup Error:",
+            "Signup error:",
             error
         );
 
 
-
-        // ====================================
+        // =================================================
         // SUPABASE ERROR
-        // ====================================
+        // =================================================
 
         if (error) {
 
-            console.error(error);
-
+            console.error(
+                "Supabase signup error:",
+                error
+            );
 
             showMessage(
                 message,
@@ -639,15 +614,13 @@ async function signup(event) {
                 "error"
             );
 
-
             return;
         }
 
 
-
-        // ====================================
-        // DATABASE FUNCTION ERROR
-        // ====================================
+        // =================================================
+        // FUNCTION RETURNED ERROR
+        // =================================================
 
         if (!data || data.success !== true) {
 
@@ -658,15 +631,13 @@ async function signup(event) {
                 "error"
             );
 
-
             return;
         }
 
 
-
-        // ====================================
-        // SIGNUP SUCCESS
-        // ====================================
+        // =================================================
+        // SUCCESS
+        // =================================================
 
         showMessage(
             message,
@@ -676,18 +647,15 @@ async function signup(event) {
         );
 
 
-
-        // ====================================
         // CLEAR SIGNUP FORM
-        // ====================================
 
         document
-            .getElementById("signupName")
+            .getElementById("signupUsername")
             .value = "";
 
 
         document
-            .getElementById("signupMobile")
+            .getElementById("signupPhone")
             .value = "";
 
 
@@ -696,15 +664,9 @@ async function signup(event) {
             .value = "";
 
 
-        document
-            .getElementById("confirmPassword")
-            .value = "";
-
-
-
-        // ====================================
+        // =================================================
         // OPEN LOGIN PAGE
-        // ====================================
+        // =================================================
 
         setTimeout(function () {
 
@@ -712,53 +674,48 @@ async function signup(event) {
 
         }, 1200);
 
-
     }
+
     catch (err) {
 
-
         console.error(
-            "Signup Error:",
+            "Signup exception:",
             err
         );
 
 
         showMessage(
             message,
-            "Something went wrong. Please try again.",
+            "Unable to connect to the server.",
             "error"
         );
 
-
     }
-    finally {
 
+    finally {
 
         button.disabled = false;
 
-
         button.textContent =
             "Create Account";
-
 
     }
 
 }
 
 
-
-// ============================================
+// =========================================================
 // LOGIN
-// ============================================
+// =========================================================
 
 async function login(event) {
 
     event.preventDefault();
 
 
-    const name =
+    const username =
         document
-            .getElementById("loginName")
+            .getElementById("loginUsername")
             .value
             .trim();
 
@@ -779,16 +736,15 @@ async function login(event) {
             .getElementById("loginButton");
 
 
+    // =====================================================
+    // USERNAME
+    // =====================================================
 
-    // ========================================
-    // NAME CHECK
-    // ========================================
-
-    if (name === "") {
+    if (username === "") {
 
         showMessage(
             message,
-            "Please enter your name.",
+            "Please enter your username.",
             "error"
         );
 
@@ -796,10 +752,9 @@ async function login(event) {
     }
 
 
-
-    // ========================================
-    // PASSWORD CHECK
-    // ========================================
+    // =====================================================
+    // PASSWORD
+    // =====================================================
 
     if (password === "") {
 
@@ -813,13 +768,7 @@ async function login(event) {
     }
 
 
-
-    // ========================================
-    // BUTTON LOADING
-    // ========================================
-
     button.disabled = true;
-
 
     button.textContent =
         "Logging in...";
@@ -828,52 +777,54 @@ async function login(event) {
     showMessage(
         message,
         "Checking your account...",
-        "success"
+        "loading"
     );
-
 
 
     try {
 
-
-        // ====================================
-        // CALL LOGIN FUNCTION
-        // ====================================
+        // =================================================
+        // CALL SUPABASE LOGIN RPC
+        // =================================================
 
         const { data, error } =
             await supabaseClient.rpc(
+
                 "login_user",
+
                 {
 
-                    p_name: name,
+                    p_username: username,
 
                     p_password: password
 
                 }
+
             );
 
 
-
         console.log(
-            "Login Data:",
+            "Login data:",
             data
         );
 
 
         console.log(
-            "Login Error:",
+            "Login error:",
             error
         );
 
 
-
-        // ====================================
+        // =================================================
         // SUPABASE ERROR
-        // ====================================
+        // =================================================
 
         if (error) {
 
-            console.error(error);
+            console.error(
+                "Supabase login error:",
+                error
+            );
 
 
             showMessage(
@@ -883,34 +834,30 @@ async function login(event) {
                 "error"
             );
 
-
             return;
         }
 
 
-
-        // ====================================
-        // WRONG LOGIN
-        // ====================================
+        // =================================================
+        // WRONG USERNAME / PASSWORD
+        // =================================================
 
         if (!data || data.success !== true) {
 
             showMessage(
                 message,
                 data?.message ||
-                "Invalid name or password.",
+                "Invalid username or password.",
                 "error"
             );
-
 
             return;
         }
 
 
-
-        // ====================================
+        // =================================================
         // LOGIN SUCCESS
-        // ====================================
+        // =================================================
 
         showMessage(
             message,
@@ -920,16 +867,11 @@ async function login(event) {
         );
 
 
-
-        // ====================================
-        // SAVE USER DETAILS
-        // ====================================
-
-        localStorage.setItem(
-            "loggedInUser",
-            JSON.stringify(data.user)
-        );
-
+        // =================================================
+        // SAVE ONLY BASIC USER INFORMATION
+        //
+        // PASSWORD IS NOT SAVED
+        // =================================================
 
         localStorage.setItem(
             "isLoggedIn",
@@ -944,28 +886,28 @@ async function login(event) {
 
 
         localStorage.setItem(
-            "userName",
-            data.user.name
+            "username",
+            data.user.username
         );
 
 
         localStorage.setItem(
-            "userMobile",
-            data.user.mobile
+            "phone",
+            data.user.phone
         );
 
 
-
-        console.log(
-            "Logged User:",
-            data.user
+        localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify(
+                data.user
+            )
         );
 
 
-
-        // ====================================
+        // =================================================
         // REDIRECT AFTER LOGIN
-        // ====================================
+        // =================================================
 
         setTimeout(function () {
 
@@ -974,44 +916,39 @@ async function login(event) {
 
         }, 700);
 
-
     }
+
     catch (err) {
 
-
         console.error(
-            "Login Error:",
+            "Login exception:",
             err
         );
 
 
         showMessage(
             message,
-            "Something went wrong. Please try again.",
+            "Unable to connect to the server.",
             "error"
         );
 
-
     }
-    finally {
 
+    finally {
 
         button.disabled = false;
 
-
         button.textContent =
             "Login";
-
 
     }
 
 }
 
 
-
-// ============================================
+// =========================================================
 // SHOW MESSAGE
-// ============================================
+// =========================================================
 
 function showMessage(
     element,
@@ -1022,48 +959,37 @@ function showMessage(
     element.textContent =
         text;
 
-
     element.className =
         "message " + type;
 
 }
 
 
-
-// ============================================
-// CLEAR MESSAGE
-// ============================================
+// =========================================================
+// CLEAR MESSAGES
+// =========================================================
 
 function clearMessages() {
 
-
     const loginMessage =
         document
-            .getElementById(
-                "loginMessage"
-            );
+            .getElementById("loginMessage");
 
 
     const signupMessage =
         document
-            .getElementById(
-                "signupMessage"
-            );
-
+            .getElementById("signupMessage");
 
 
     loginMessage.className =
         "message";
 
-
     loginMessage.textContent =
         "";
 
 
-
     signupMessage.className =
         "message";
-
 
     signupMessage.textContent =
         "";
@@ -1071,13 +997,12 @@ function clearMessages() {
 }
 
 
-
-// ============================================
-// MOBILE NUMBER - NUMBERS ONLY
-// ============================================
+// =========================================================
+// PHONE NUMBER - NUMBERS ONLY
+// =========================================================
 
 document
-    .getElementById("signupMobile")
+    .getElementById("signupPhone")
     .addEventListener(
         "input",
         function () {
@@ -1089,7 +1014,6 @@ document
 
         }
     );
-
 
 </script>
 
